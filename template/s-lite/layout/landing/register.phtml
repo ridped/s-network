@@ -1,0 +1,62 @@
+<div class="lg:flex max-w-5xl min-h-screen mx-auto p-6 py-10">
+        <div class="flex flex-col items-center lg: lg:flex-row lg:space-x-10">
+
+            <div class="lg:mb-12 flex-1 lg:text-left text-center">
+                <img src="https://waysender-v2.ridped.com/community/themes/waynetwork/img/logo.png?cache=523" alt="" class="lg:mx-0 lg:w-52 mx-auto w-40">
+                <p class="font-medium lg:mx-0 md:text-2xl mt-6 mx-auto sm:w-3/4 text-xl"> Register for free on <?php echo $rid['web_setting']['title'];?>.</p>
+            </div>
+            <div class="lg:mt-0 lg:w-96 md:w-1/2 sm:w-2/3 mt-10 w-full">
+                <form class="p-6 space-y-4 relative bg-white shadow-lg rounded-lg" method="POST" id="register"> 
+                    <div class="mt-8 text-center text-sm errors-rid"></div>
+                    <input type="text" placeholder="Username" name="username" id="username" class="with-border" required>
+                    <input type="password" placeholder="Password" name="password" id="password" class="with-border" required>
+                    <input type="email" placeholder="Email" name="email" id="email" class="with-border" required>
+                    <input type="text" placeholder="Full name" name="fullName" id="fullName" class="with-border">
+                    <button type="submit" class="bg-blue-600 font-semibold p-3 rounded-md text-center text-white w-full main-bt">
+                        Register
+                    </button>
+                    <hr class="pb-3.5">
+                    <div class="flex">
+                        <a href="<?php echo $rid['site_url'];?>" class="bg-green-600 hover:bg-green-500 hover:text-white font-semibold py-3 px-5 rounded-md text-center text-white mx-auto">
+                            Login
+                        </a>
+                    </div>
+                </form>
+
+                <div class="mt-8 text-center text-sm"> <a href="#" class="font-semibold hover:underline"> NOTE: </a> Still beta, Let's develop this together. Create your own idea now! </div>
+            </div>
+    
+        </div>
+    </div>
+    
+<script>
+var $this = $('#register');
+var $state = $this.find('.errors-rid');
+$(function() {
+    try {
+      $this.ajaxForm({
+        url: rid_requestFile() + '?f=register',
+        beforeSend: function() {
+            $this.find('.main_bt').attr("disabled", true);
+            $this.find('.main_bt').html('Please wait...');
+        },
+        success: function(data) {
+          data = JSON.parse(data);
+          if (data.status == true) {
+            $state.html('<p style="color: green;">Berhasil mendaftar</p>');
+            $this.find('.main_bt').html('Successfully');
+            setTimeout(function () {
+             window.location.href = window.location;
+            }, 1000);
+          } else {
+            $this.find('.main_bt').attr("disabled", false);
+            $this.find('.main_bt').html('Register');
+            $state.html(`<p style="color: red;">${data.errors}</p>`);
+          }
+        }
+      });
+  } catch(e) {
+    console.log(e);
+  }
+});
+</script>

@@ -1,0 +1,8 @@
+{
+    "host_name": "localhost",
+    "user": "ridpedco",
+    "password": "W@ys3nd3rzz",
+    "db_name": "ridpedco_social_network",
+    "domain": "https://social-network.ridped.com",
+    "domain_without_http": "social-network.ridped.com"
+}
