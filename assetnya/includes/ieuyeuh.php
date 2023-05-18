@@ -4,6 +4,7 @@
 // | @author RIDPEDIA
 // | @author_url 1: http://www.ridped.com
 // | @author_email: ridahh23@gmail.com
+// | @dataGlobal
 // +------------------------------------------------------------------------+
 */
 ini_set('display_errors', 1);

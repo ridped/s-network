@@ -1,3 +1,49 @@
 <div class="mcontainer">
+    <div class="lg:flex lg:space-x-10">
     <h2 class="text-xl font-semibold">Coming soon, Become a contributor to this project now!.</h2>
+    <div class="lg:w-72 w-full">
+                
+                            <div class="bg-white mb-5 px-4 py-3 rounded-md shadow">
+                                <h3 class="text-line-through font-semibold mb-1"> Announcement </h3>
+                                <div class="-mx-2 duration-300 flex hover:bg-gray-50 px-2 py-2 rounded-md">
+                                    <p class="line-clamp-2 leading-6"> In development</p>
+                                </div>
+                            </div>
+                        <hr>
+                        <h3 class="text-xl font-semibold"> Last person to register </h3>
+                
+                        <div class="" uk-sticky="offset:80">            
+                            <div class="contact-list">
+                                <?php 
+                                $q = $rid['sqlConnect']->query("SELECT * FROM rid_account ORDER BY id LIMIT 5");
+                                while($row = mysqli_fetch_assoc($q)) { ?>
+                                <a href="#">
+                                    <div class="contact-avatar">
+                                        <img src="https://waysender-v2.ridped.com/community/themes/waynetwork/img/logo.png?cache=523" alt="">
+                                        <span class="user_status status_online"></span>
+                                    </div>
+                                    <div class="contact-username"> <?= $row['full_name'];?></div>
+                                </a>
+                                <div uk-drop="pos: left-center ;animation: uk-animation-slide-left-small">
+                                    <div class="contact-list-box">
+                                        <div class="contact-avatar">
+                                            <img src="https://waysender-v2.ridped.com/community/themes/waynetwork/img/logo.png?cache=523" alt="">
+                                            <span class="user_status status_online"></span>
+                                        </div>
+                                        <div class="contact-username"> <?= $row['full_name'];?> </div>
+                                        <p> 
+                                            <ion-icon name="people" class="text-lg mr-1"></ion-icon> Become friends with 
+                                            <strong> <?= $row['full_name'];?> </strong>
+                                        </p>
+                                        <div class="contact-list-box-btns">
+                                            <a href="#" rid-ajax="?link1=profile&uid=<?= $row['id'];?>"><button type="button" class="button primary flex-1 mr-2"> See profile</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                            </div>
+                        </div>
+                
+                    </div>
+                </div>
 </div>

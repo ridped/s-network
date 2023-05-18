@@ -4,6 +4,7 @@
 // | @author RIDPEDIA
 // | @author_url 1: http://www.ridped.com
 // | @author_email: ridahh23@gmail.com
+// | @DatabaseConnection
 // +------------------------------------------------------------------------+
 */
 $data_web = json_decode(file_get_contents(__DIR__ . '/config.json'), true) or die('error');

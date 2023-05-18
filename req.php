@@ -4,6 +4,7 @@
 // | @author RIDPEDIA
 // | @author_url 1: http://www.ridped.com
 // | @author_email: ridahh23@gmail.com
+// | @AjaxRequest
 // +------------------------------------------------------------------------+
 */
 require_once('assetnya/require.php');

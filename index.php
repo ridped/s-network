@@ -4,17 +4,13 @@
 // | @author RIDPEDIA
 // | @author_url 1: http://www.ridped.com
 // | @author_email: ridahh23@gmail.com
+// | @defaultIndex!
 // +------------------------------------------------------------------------+
 */
 require_once('assetnya/require.php');
 $page = '';
 if ($_GET['link1']) {
     $page = $_GET['link1'];
-}
-
-if (empty($page)) {
-    // default is landing
-    $page = 'landing';
 }
 if ($rid['loggedin'] == true) {
     $u = $_SESSION['rid_username'];
@@ -28,6 +24,14 @@ if ($rid['loggedin'] == true) {
             setcookie("forced", "1");
             header("location: " . $rid['site_url'] . "/index.php?link1=logout");
         }
+    }
+    if (empty($page)) {
+        $page = 'beranda';
+    }
+} else {
+    if (empty($page)) {
+        // default is landing
+        $page = 'landing';
     }
 }
 switch($page) {

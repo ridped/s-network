@@ -32,6 +32,37 @@
          function rid_requestFile() {
              return "<?php echo $rid['site_url'];?>/req.php";
          }
+         function base_url() {
+            return "<?php echo $rid['site_url'];?>";
+         }
+
+         $(document).on('click', 'a[rid-ajax]', function(e) {
+               var contentnya = $('.main_content');
+               var ISAPI = false;
+               var url = $(this).attr('rid-ajax');
+               e.preventDefault();
+               if (!ISAPI) {
+                 $.post(rid_ajaxFileLoad() + url, {url:url}, function (data) {
+                     var json_data = JSON.parse($(data).filter('#json-data').val());
+                     if (json_data.redirect == true) {
+                        return window.location.href = json_data.redirect_url;
+                     }
+                     contentnya.html(data);
+                     document.title = json_data.title;
+                     if (json_data.is_beranda) {
+                        window.history.pushState({state:'new'},'', base_url());
+                     } else {
+                        window.history.pushState({state:'new'},'', base_url() + '/index.php' + url);
+                     }
+                     $("html, body").animate({ scrollTop: 0 }, 150);
+                 }).fail(function() {
+                    alert('Oops!')
+                  })
+                  .always(function() {
+                    $("html, body").animate({ scrollTop: 0 }, 150);
+                  });
+               }
+           });
      </script>
 
 

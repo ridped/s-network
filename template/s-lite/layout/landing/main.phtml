@@ -40,6 +40,7 @@ $(function() {
             $this.find('.main_bt').html('Please wait...');
         },
         success: function(data) {
+            console.log('this ', data)
           data = JSON.parse(data);
           if (data.status == true) {
             $state.html('<p style="color: green;">Berhasil login</p>');

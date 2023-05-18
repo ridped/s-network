@@ -1,0 +1,113 @@
+<div class="mcontainer">
+
+                <!-- Profile cover -->
+                <div class="profile user-profile">
+  
+                    <div class="profiles_banner">
+                        <img src="https://waysender-v2.ridped.com/community/themes/waynetwork/img/logo.png?cache=523" alt="">
+                        <div class="profile_action absolute bottom-0 right-0 space-x-1.5 p-3 text-sm z-50 hidden lg:flex">
+                      </div>
+                    </div>
+                    <div class="profiles_content">
+
+                        <div class="profile_avatar">
+                            <div class="profile_avatar_holder"> 
+                                <img src="https://waysender-v2.ridped.com/community/themes/waynetwork/img/logo.png?cache=523" alt="">
+                            </div>
+                            <div class="user_status status_online"></div>
+                        </div>
+                        <div class="profile_info">
+                        	<h1 class="text-center text-black dark:text-gray-100"> <?php echo $rid['dataProfile']['full_name'];?> </h1>
+                            <p>Create your own idea!</p>
+                        </div>
+
+                    </div>
+
+                    <div class="flex justify-between lg:border-t border-gray-100 flex-col-reverse lg:flex-row pt-2">
+                        <nav class="responsive-nav pl-3">
+                            <ul  uk-switcher="connect: #timeline-tab; animation: uk-animation-fade">
+                                <li><a href="timeline.html#">Timeline</a></li>
+                                <li><a href="timeline.html#">Friend <span>0</span> </a></li>
+                            </ul>
+                        </nav>
+ 
+                        <!-- button actions -->
+                        <div class="flex items-center space-x-1.5 flex-shrink-0 pr-4 mb-2 justify-center order-1 relative">
+                            
+                            <!-- Edit profile -->
+                            <?php if ($rid['loggedin'] && !$rid['isOwnerUser']) { ?>
+                            <a href="#" class="flex items-center justify-center h-10 px-5 rounded-md bg-blue-600 text-white space-x-1.5 hover:text-white"> 
+                                <span> Follow </span>
+                            </a>
+                           <?php } ?>
+
+                            <!-- more icon -->
+                            <a href="#" class="flex items-center justify-center h-10 w-10 rounded-md bg-gray-100"> 
+                                <ion-icon name="ellipsis-horizontal" class="text-xl"></ion-icon>
+                            </a>
+                            <!-- more drowpdown -->
+                            <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden border border-gray-100 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-700"  
+                              uk-drop="mode: click;pos: bottom-right;animation: uk-animation-slide-bottom-small; offset:5">
+                                  <ul class="space-y-1">
+                                    <li>Coming soon</li>
+                                  </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                
+                <div class="uk-switcher lg:mt-8 mt-4" id="timeline-tab">
+  
+                    <!-- Timeline -->
+                    <div class="md:flex md:space-x-6 lg:mx-16">
+                    	<div class="space-y-5 flex-shrink-0 md:w-7/12">
+                    		<h4 class="text-center text-lg font-semibold"> Coming soon!! </h4>
+                    	</div>
+
+                        <!-- Sidebar -->
+                        <div class="w-full space-y-6">
+                        
+                            <div class="widget card p-5">
+                                <h4 class="text-lg font-semibold"> About </h4>
+                                <ul class="text-gray-600 space-y-3 mt-3">
+                                    <li class="flex items-center space-x-2"> 
+                                        <ion-icon name="home-sharp" class="rounded-full bg-gray-200 text-xl p-1 mr-3"></ion-icon>
+                                        Live In <strong> Indonesia, Jawa barat  </strong>
+                                    </li>
+                                    <li class="flex items-center space-x-2"> 
+                                        <ion-icon name="globe" class="rounded-full bg-gray-200 text-xl p-1 mr-3"></ion-icon>
+                                        From <strong> Bandung  </strong>
+                                    </li>
+                                    <li class="flex items-center space-x-2"> 
+                                        <ion-icon name="heart-sharp" class="rounded-full bg-gray-200 text-xl p-1 mr-3"></ion-icon>
+                                        Relationship <strong> Married  </strong>
+                                    </li>
+                                    <li class="flex items-center space-x-2"> 
+                                        <ion-icon name="logo-rss" class="rounded-full bg-gray-200 text-xl p-1 mr-3"></ion-icon>
+                                        Followed By <strong> 0 People </strong>
+                                    </li>                                
+                                </ul>
+                              <?php if ($rid['loggedin'] && $rid['isOwnerUser']) { ?>
+                              <a href="#" class="button gray mt-3 w-full"> Edit </a>
+                          	  <?php } ?>
+                            </div>  
+                        </div>
+                    </div>
+                          
+                    <!-- Friends  -->
+                    <div class="card md:p-6 p-2 max-w-3xl mx-auto">
+
+                        <h2 class="text-xl font-bold"> Friends</h2>
+ 
+                        <nav class="responsive-nav border-b">
+                            <ul>
+                                <li class="active"><a href="#" class="lg:px-2"> All Friends <span> 0 </span> </a></li>
+                            </ul>
+                        </nav>
+                             
+                        <h4 class="text-center text-lg font-semibold"> Coming soon!! </h4>
+                    </div>
+                </div>
+            </div>

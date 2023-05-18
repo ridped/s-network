@@ -1,8 +1,8 @@
 {
-    "host_name": "YOUR_HOST",
-    "user": "YOUR_USERNAME",
-    "password": "YOUR_PASS",
-    "db_name": "YOUR_DBNAME",
-    "domain": "https://yourdomain.com",
-    "domain_without_http": "yourdomainm.com"
+    "host_name": "localhost",
+    "user": "root",
+    "password": "",
+    "db_name": "sn",
+    "domain": "http://localhost/sn",
+    "domain_without_http": "http://localhost/sn"
 }

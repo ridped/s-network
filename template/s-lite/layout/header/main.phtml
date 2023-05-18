@@ -9,7 +9,7 @@
                         </span>
 
                         <div id="logo">
-                            <a href="#"> 
+                            <a href="<?php echo $rid['site_url'];?>" data-ajax="?link1=beranda"> 
                                 <img src="https://waysender-v2.ridped.com/community/themes/waynetwork/img/logo.png?cache=523" alt="">
                                 <img src="https://waysender-v2.ridped.com/community/themes/waynetwork/img/logo.png?cache=523" class="logo_mobile" alt="">
                             </a>
@@ -25,7 +25,7 @@
                     <div class="right_side">
     
                         <div class="header_widgets">
-                            <a href="https://github.com/ridped" class="is_link">  Join </a>   
+                            <a href="https://github.com/ridped/s-network" class="is_link">  Download / Join </a>   
 
                             <a href="#" class="is_icon" uk-tooltip="title: Notifications">
                                 <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path></svg>
@@ -309,13 +309,13 @@
          
         
                             <a href="#">
-                                <img src="<?php echo $rid['site_url'];?>/template/<?php echo $rid['template'];?>/assets/images/avatars/avatar-2.jpg" class="is_avatar" alt="">
+                                <img src="https://waysender-v2.ridped.com/community/themes/waynetwork/img/logo.png?cache=523" class="is_avatar" alt="">
                             </a>
                             <div uk-drop="mode: click;offset:5" class="header_dropdown profile_dropdown">
 
-                                <a href="#" class="user">
+                                <a href="<?php echo $rid['site_url'];?>/index.php?link1=profile&uid=<?php echo $rid['dataUser']['id'];?>" rid-ajax="?link1=profile&uid=<?php echo $rid['dataUser']['id'];?>" class="user">
                                     <div class="user_avatar">
-                                        <img src="<?php echo $rid['site_url'];?>/template/<?php echo $rid['template'];?>/assets/images/avatars/avatar-2.jpg" alt="">
+                                        <img src="https://waysender-v2.ridped.com/community/themes/waynetwork/img/logo.png?cache=523" alt="">
                                     </div>
                                     <div class="user_name">
                                         <div> <?php echo $rid['dataUser']['full_name'];?> </div>

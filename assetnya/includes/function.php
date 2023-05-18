@@ -4,6 +4,7 @@
 // | @author RIDPEDIA
 // | @author_url 1: http://www.ridped.com
 // | @author_email: ridahh23@gmail.com
+// | @DefaultFunction
 // +------------------------------------------------------------------------+
 */
 
@@ -105,7 +106,7 @@ function rid_CreateLogin($u, $p) {
     global $rid;
     $d = $rid['sqlConnect']->query("SELECT * FROM rid_account WHERE rid_username = '$u'")->fetch_assoc();
     if (password_verify($p, $d['rid_password'])){
-        if (password_needs_rehash($d['rid_password'])){
+        if (password_needs_rehash($d['rid_password'], PASSWORD_DEFAULT)){
             $new_pass = password_hash($p, PASSWORD_DEFAULT);
             $rid['sqlConnect']->query("UPDATE rid_account SET rid_password = '$new_pass' WHERE rid_username = '$u'");
         }
