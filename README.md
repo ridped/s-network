@@ -24,11 +24,13 @@
 
 <!-- GETTING STARTED -->
 ## Getting Started
-
+	1. NODE JS (required)
 	1. Clone using Git / Download manually this repository.
 	2. edit the database connection in the config.json file
   	3. change domain in the config.json file
-	4. Done.
+	4. install module
+	5. run node rid_server.js
+	6. Done.
 
 ## NOTE
 
