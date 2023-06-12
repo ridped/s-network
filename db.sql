@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: May 15, 2023 at 04:53 PM
--- Server version: 10.5.20-MariaDB
--- PHP Version: 8.1.16
+-- Host: 127.0.0.1
+-- Generation Time: Jun 12, 2023 at 06:46 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ridpedco_social_network`
+-- Database: `sn`
 --
 
 -- --------------------------------------------------------
@@ -176,7 +176,74 @@ CREATE TABLE `rid_account` (
 INSERT INTO `rid_account` (`id`, `rid_username`, `rid_password`, `rid_level`, `nd`, `c_wa`, `full_name`, `email`, `cookie`) VALUES
 (184, 'ridahcorp', '$2y$10$z0rnMpj6dVYOlz50Ey7IGedfz73gaWFs7Jgs2/Fw0Y1M2v3OyLUV2', '1', '2', '62857575723', 'Rid', 'ridah@gmail.com', 'e24b2904b4d6808ed4c71b5592500482'),
 (187, 'demouser', '$2y$10$6v/Y8mpr7L8GEsQ8cM4G/u57Y0PaIASOQIEP/8zC.Wwa246CfJBRO', '1', '2', '085777533599', 'Just demo', 'demo@gmail.com', '91017d590a69dc49807671a51f10ab7f'),
-(242, 'Joseph', '$2y$10$qsCxZohlEFtwrXy7W/XKD.rahJQxyrDXC3WmsmFzkReUomhCFp036', '2', '2', '', 'Ario biesch', 'ario.biesch@gmail.com', '6a1a376d8169cfc1835f59ac934edbb7');
+(242, 'Joseph', '$2y$10$qsCxZohlEFtwrXy7W/XKD.rahJQxyrDXC3WmsmFzkReUomhCFp036', '2', '2', '', 'Ario biesch', 'ario.biesch@gmail.com', '6a1a376d8169cfc1835f59ac934edbb7'),
+(243, 'testcuy', '$2y$10$QtbwxLnkqbovekvfLuBUy.TOQ9wc5qooN.ZrCJyv57SWNquy.PpTK', '2', '2', '', 'testcuy', 'testcuy@gmail.com', '0f9f6aa02624016cbddeabdabdc8a499');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rid_chats`
+--
+
+CREATE TABLE `rid_chats` (
+  `id` int(11) NOT NULL,
+  `id_user` varchar(100) NOT NULL,
+  `c_with` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `rid_chats`
+--
+
+INSERT INTO `rid_chats` (`id`, `id_user`, `c_with`) VALUES
+(79, '184', '243'),
+(80, '243', '184');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rid_messages`
+--
+
+CREATE TABLE `rid_messages` (
+  `id` int(11) NOT NULL,
+  `from_id` int(11) NOT NULL DEFAULT 0,
+  `to_id` int(11) NOT NULL DEFAULT 0,
+  `text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `time` int(11) NOT NULL DEFAULT 0,
+  `seen` int(11) NOT NULL DEFAULT 0,
+  `deleted_one` int(10) DEFAULT 0,
+  `deleted_two` int(10) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `rid_messages`
+--
+
+INSERT INTO `rid_messages` (`id`, `from_id`, `to_id`, `text`, `time`, `seen`, `deleted_one`, `deleted_two`) VALUES
+(647, 184, 243, 'asdasd', 1686366075, 0, 0, 0),
+(648, 243, 184, 'kelas ga anjai?', 1686366090, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rid_posts`
+--
+
+CREATE TABLE `rid_posts` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `postType` varchar(30) NOT NULL DEFAULT '',
+  `time` int(11) NOT NULL DEFAULT 0,
+  `postText` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `rid_posts`
+--
+
+INSERT INTO `rid_posts` (`id`, `user_id`, `postType`, `time`, `postText`) VALUES
+(195, 184, 'text', 1686544901, 'cuakss');
 
 -- --------------------------------------------------------
 
@@ -198,7 +265,7 @@ CREATE TABLE `web_setting` (
 --
 
 INSERT INTO `web_setting` (`id`, `title`, `footer`, `nd_default`, `description`, `themes`) VALUES
-(1, 'WAY-VMD', 'FROM RIDPEDIA', '2', 'WAY-VMD best tools', 's-lite');
+(1, 's-network', 'FROM RIDPEDIA', '2', 'Just a simple social network', 's-lite');
 
 --
 -- Indexes for dumped tables
@@ -215,6 +282,45 @@ ALTER TABLE `languages`
 --
 ALTER TABLE `rid_account`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `rid_chats`
+--
+ALTER TABLE `rid_chats`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `rid_messages`
+--
+ALTER TABLE `rid_messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `from_id` (`from_id`),
+  ADD KEY `to_id` (`to_id`),
+  ADD KEY `seen` (`seen`),
+  ADD KEY `time` (`time`),
+  ADD KEY `order1` (`from_id`,`id`),
+  ADD KEY `order2` (`id`),
+  ADD KEY `order3` (`to_id`,`id`),
+  ADD KEY `order7` (`seen`,`id`),
+  ADD KEY `order8` (`time`,`id`),
+  ADD KEY `order4` (`from_id`,`id`),
+  ADD KEY `order5` (`id`),
+  ADD KEY `order6` (`to_id`,`id`);
+
+--
+-- Indexes for table `rid_posts`
+--
+ALTER TABLE `rid_posts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `postType` (`postType`),
+  ADD KEY `time` (`time`),
+  ADD KEY `order1` (`user_id`,`id`),
+  ADD KEY `order2` (`id`),
+  ADD KEY `order3` (`id`),
+  ADD KEY `order4` (`id`),
+  ADD KEY `order5` (`id`),
+  ADD KEY `order6` (`id`);
 
 --
 -- Indexes for table `web_setting`
@@ -236,7 +342,25 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT for table `rid_account`
 --
 ALTER TABLE `rid_account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=243;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=244;
+
+--
+-- AUTO_INCREMENT for table `rid_chats`
+--
+ALTER TABLE `rid_chats`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+
+--
+-- AUTO_INCREMENT for table `rid_messages`
+--
+ALTER TABLE `rid_messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=649;
+
+--
+-- AUTO_INCREMENT for table `rid_posts`
+--
+ALTER TABLE `rid_posts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
 
 --
 -- AUTO_INCREMENT for table `web_setting`

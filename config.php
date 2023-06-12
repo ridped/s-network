@@ -13,4 +13,7 @@ $user_db = $data_web['user'];
 $pass_db = $data_web['password'];
 $db_name = $data_web['db_name'];
 $site_url = $data_web['domain'];
+$port_app = $data_web['port'];
+$ssl = $data_web['ssl'];
+$d_w = $data_web['domain_without_http'];
 ?>

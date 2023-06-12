@@ -36,8 +36,11 @@
                             
                             <!-- Edit profile -->
                             <?php if ($rid['loggedin'] && !$rid['isOwnerUser']) { ?>
-                            <a href="#" class="flex items-center justify-center h-10 px-5 rounded-md bg-blue-600 text-white space-x-1.5 hover:text-white"> 
+                            <a href="#" onclick="comingsun();"class="flex items-center justify-center h-10 px-5 rounded-md bg-blue-600 text-white space-x-1.5 hover:text-white"> 
                                 <span> Follow </span>
+                            </a>
+                            <a href="#" rid-ajax="?link1=messages&uid=<?php echo $rid['dataProfile']['id'];?>"class="flex items-center justify-center h-10 px-5 rounded-md bg-blue-600 text-white space-x-1.5 hover:text-white"> 
+                                <span> Messages </span>
                             </a>
                            <?php } ?>
 

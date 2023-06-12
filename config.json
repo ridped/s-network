@@ -4,5 +4,9 @@
     "password": "",
     "db_name": "sn",
     "domain": "http://localhost/sn",
-    "domain_without_http": "http://localhost/sn"
+    "domain_without_http": "localhost",
+    "ssl": false,
+    "port": 8812,
+    "path_cert": "REQUIRED IF SSL TRUE",
+    "path_key": "REQUIRED IF SSL TRUE"
 }

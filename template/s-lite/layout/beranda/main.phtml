@@ -1,9 +1,23 @@
 <div class="mcontainer">
     <div class="lg:flex lg:space-x-10">
-    <h2 class="text-xl font-semibold">Coming soon, Become a contributor to this project now!.</h2>
-    <div class="lg:w-72 w-full">
-                
-                            <div class="bg-white mb-5 px-4 py-3 rounded-md shadow">
+        <div class="lg:w-3/4 lg:px-20 space-y-7 all-post">
+        <!-- create post -->
+        <?php echo rid_LoadPage('beranda/post_form');?>
+            <?php
+            $getpost = rid_getPosts();
+            if ($getpost !== false) {
+                while($row = mysqli_fetch_assoc($getpost)) {
+                    $rid['datapost'] = $row;
+                    $row['user_id'] == $rid['dataUser']['id'] ? $rid['datauserpost'] = $rid['dataUser'] : $rid['datauserpost'] = getDataUser($row['user_id']); 
+                    echo rid_loadPage('post/main');
+                }
+            } else { ?>
+             Nothing to show!
+            <?php } ?>      
+
+        </div>
+                    <div class="lg:w-72 w-full">
+                        <div class="bg-white mb-5 px-4 py-3 rounded-md shadow">
                                 <h3 class="text-line-through font-semibold mb-1"> Announcement </h3>
                                 <div class="-mx-2 duration-300 flex hover:bg-gray-50 px-2 py-2 rounded-md">
                                     <p class="line-clamp-2 leading-6"> In development</p>
@@ -43,7 +57,6 @@
                             <?php } ?>
                             </div>
                         </div>
-                
                     </div>
                 </div>
 </div>

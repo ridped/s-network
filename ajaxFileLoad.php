@@ -79,6 +79,9 @@ switch($page) {
     case 'profile':
         include('sc/profile.php');
     break;
+    case 'messages':
+        include('sc/messages.php');
+    break;
     case 'logout':
         include('sc/logout.php');
     break;
@@ -94,6 +97,7 @@ $data['url']             = '';
 $actual_link             = "http://$_SERVER[HTTP_HOST]";
 $data['title']           = $rid['title'];
 $data['is_beranda']      = $rid['is_beranda'];
+$data['is_page']      = $page;
 ?>
 <input type="hidden" id="json-data" value='<?php
 echo htmlspecialchars(json_encode($data));

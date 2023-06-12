@@ -1,0 +1,123 @@
+<span uk-toggle="target: .message-content;" class="rid_choose fixed left-0 top-36 bg-red-600 z-10 py-1 px-4 rounded-r-3xl text-white">Choose Chats</span>
+<div class="messages-container">
+                <div class="messages-container-inner">
+                    <div class="messages-inbox">
+                        <div class="messages-headline">
+                            <div class="input-with-icon" hidden>
+                                    <input id="autocomplete-input" type="text" placeholder="Search">
+                                <i class="icon-material-outline-search"></i>
+                            </div>
+                            <h2 class="text-2xl font-semibold">Chats</h2>
+                            <span hidden class="absolute icon-feather-edit mr-4 text-xl uk-position-center-right cursor-pointer"></span>
+                        </div>
+                        <div class="messages-inbox-inner" data-simplebar>
+                            <ul class="rid_chats">
+                                <?php
+                                   $dataC = getChats();
+                                   if ($dataC !== false) {
+                                        while ($row = mysqli_fetch_assoc($dataC)) {
+                                            $dataU = getDataUser($row['c_with']);
+                                            $getLastMsg = getMsgs($row['c_with'], $row['id_user'], 1);
+                                            if ($getLastMsg !== false) {
+                                                $getLastMsg = $getLastMsg->fetch_assoc();
+                                            }
+                                 ?>
+                                <li class="" id="chatid-<?= $row['c_with'];?>" onclick="rid_openMsg(`<?= $row['c_with'];?>`);">
+                                    <a href="#">
+                                        <div class="message-avatar"><i class="status-icon status-online"></i><img src="https://waysender-v2.ridped.com/community/themes/waynetwork/img/logo.png?cache=523" alt=""></div>
+    
+                                        <div class="message-by">
+                                            <div class="message-by-headline">
+                                                <h5><?= $dataU['full_name'];?></h5>
+                                            </div>
+                                            <p id="lastmsg-<?= $row['c_with'];?>"><?php echo $getLastMsg['from_id'] == $row['id_user'] ? 'You: ' . $getLastMsg['text'] : $getLastMsg['text'];?></p>
+                                        </div>
+                                    </a>
+                                </li>
+                            <?php } } else { ?>
+                                Nothing to show!
+                            <?php } ?>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="message-content" hidden></div>
+
+
+                </div>
+            </div> 
+
+<script>
+<?php if (isset($_GET['uid'])) { ?>
+rid_openMsg(`<?php echo $_GET['uid'];?>`);
+<?php } ?>
+
+$( document ).ready(function() {
+    if ($('.message-content').is(':hidden')) {
+        $('.rid_choose').hide();
+    } else {
+        $('.message-content').removeAttr('hidden');
+    }
+
+    $('.rid_choose').on('click', function() {
+        $('.rid_choose').hide();
+        $('.message-content').html('');
+        window.history.pushState({state:'new'},'', base_url() + '/index.php' + '?link1=messages');
+    });
+
+});
+
+function rid_openMsg(id_user) {
+    try {
+    $('.message-content').html('');
+    $(`.active-message`).removeAttr('class');
+    to_id = id_user;
+    var msg_content = $('.message-content');
+    $.get(rid_requestFile(), {f: 'getmsg', c_with: id_user}, function(data) {
+        var ridCans = JSON.parse(data);
+        if (ridCans.redirect === true) return window.location.href = base_url() + '/index.php?link1=404';
+        if (ridCans.status === false) {
+            firstTime = true;
+        } else {
+            firstTime = false;
+        }
+        $(`#chatid-${id_user}`).addClass('active-message');
+        $('.message-content').removeAttr('hidden');
+        $('.message-content').removeAttr('aria-hidden');
+        $('.rid_choose').show();
+        msg_content.html(ridCans.html);
+        window.history.pushState({state:'new'},'', base_url() + '/index.php' + '?link1=messages&uid=' + id_user);
+        $(".simplebar-content").animate({ scrollTop: $('.ripple-effect').offset().top -100}, 1000);
+    })
+    } catch(e) {
+        console.log('error!');
+    }
+}
+
+function rid_send() {
+    $('.rid-send').prop('disabled', true);
+    var uid = $('input[name="to_id"]').val();
+    var nm = $('input[name="fullnem"]').val();
+    var pesanya = document.getElementById("form_msg").value;
+    if (pesanya.length < 1) {
+        return alert('Message is empty!');
+    }
+    var from_name = "<?php echo $rid['dataUser']['full_name'];?>";
+    socket.emit("receivedMessage", {
+        from_id: logged_id,
+        to_id: uid,
+        pesanya: pesanya,
+        time: <?php echo time();?>,
+        from_name: from_name,
+        first: firstTime
+    });
+    rid_appendMe(pesanya, uid, nm, firstTime);
+    firstTime = false;
+    $('.rid-send').prop('disabled', false);
+    document.getElementById('sound_pop').play();
+}
+
+
+
+</script>

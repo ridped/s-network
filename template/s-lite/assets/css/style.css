@@ -7828,6 +7828,13 @@ header .header_inner .right_side {
   border-radius: 50%;
 }
 
+.rid-seen img {
+  position: right;
+  width: 15px;
+  height: 15px;
+  border-radius: 10%;
+}
+
 .messages-inbox ul li {
   -webkit-transition: 0.2s;
   transition: 0.2s;

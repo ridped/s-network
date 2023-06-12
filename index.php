@@ -47,6 +47,9 @@ switch($page) {
     case 'profile':
         include('sc/profile.php');
     break;
+    case 'messages':
+        include('sc/messages.php');
+    break;
     case 'logout':
         include('sc/logout.php');
     break;

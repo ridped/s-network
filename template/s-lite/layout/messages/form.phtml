@@ -1,0 +1,7 @@
+
+	<div class="message-reply">
+			<textarea autofocus id="form_msg" onkeyup="regisTyping(`<?php echo $rid['dataUser']['id'];?>`, `<?php echo $rid['data_c_with']['id'];?>`)" cols="1" rows="1" placeholder="Your Message"></textarea>
+			<input type="hidden" name="to_id" value="<?php echo $rid['data_c_with']['id'];?>">
+			<input type="hidden" name="fullnem" value="<?php echo $rid['data_c_with']['full_name'];?>">
+			<button type="button" onclick="rid_send();"class="rid-send button ripple-effect">Send</button>
+	</div>

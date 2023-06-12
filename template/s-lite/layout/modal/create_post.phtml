@@ -1,0 +1,27 @@
+<!-- Craete post modal -->
+    <div id="create-post-modal" class="create-post is-story" uk-modal>
+        <div
+            class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical rounded-lg p-0 lg:w-5/12 relative shadow-2xl uk-animation-slide-bottom-small">
+    
+            <div class="text-center py-3 border-b">
+                <h3 class="text-lg font-semibold"> Create Post </h3>
+                <button class="uk-modal-close-default bg-gray-100 rounded-full p-2.5 right-2" type="button" uk-close uk-tooltip="title: Close ; pos: bottom ;offset:7"></button>
+            </div>
+            <div class="flex flex-1 items-start space-x-4 p-5">
+                <img src="https://waysender-v2.ridped.com/community/themes/waynetwork/img/logo.png?cache=523"
+                    class="bg-gray-200 border border-white rounded-full w-11 h-11">
+                <div class="flex-1 pt-2">
+                    <textarea class="rid-text-post uk-textare text-black shadow-none focus:shadow-none text-xl font-medium resize-none" rows="5"
+                        placeholder="What's Your Mind ? <?php echo $rid['dataUser']['full_name'];?>!"></textarea>
+                </div>
+    
+            </div>
+            <div class="flex items-center w-full justify-between border-t p-3">
+    
+                <div class="flex space-x-2">
+                    <a create_post href="#" class="btn-create-post bg-blue-600 flex h-9 items-center justify-center rounded-md text-white px-5 font-medium">
+                      Share </a>    
+                </div>
+            </div>
+        </div>
+    </div>

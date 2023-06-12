@@ -184,4 +184,84 @@ function randString($length) {
     return $rand;
 }
 
+function getMsgs($user_id, $logged_user_id, $limit = 50, $sort = 'DESC') {
+    global $rid;
+    if ($rid['sqlConnect']->query("SELECT * FROM rid_messages WHERE from_id = '$user_id' AND to_id = '$logged_user_id' OR from_id = '$logged_user_id' AND to_id = '$user_id'")->num_rows < 1) {
+        return false;
+    } else {
+        return $rid['sqlConnect']->query("SELECT * FROM (SELECT * FROM rid_messages WHERE from_id = '$user_id' AND to_id = '$logged_user_id' OR from_id = '$logged_user_id' AND to_id = '$user_id' ORDER BY id $sort LIMIT $limit) AS sub ORDER BY id ASC");
+    }
+    return false;
+}
+
+function getChats($limit = 10) {
+    global $rid;
+    $uid = $rid['dataUser']['id'];
+    if ($rid['sqlConnect']->query("SELECT * FROM rid_chats WHERE id_user = '$uid'")->num_rows < 1) {
+        return false;
+    } else {
+        return $rid['sqlConnect']->query("SELECT * FROM rid_chats WHERE id_user = '$uid' ORDER BY id DESC LIMIT $limit");
+    }
+    return false;
+}
+
+function getDataUser($id) {
+    global $rid;
+    if ($rid['sqlConnect']->query("SELECT * FROM rid_account WHERE id = '$id'")->num_rows > 0) {
+        return $rid['sqlConnect']->query("SELECT * FROM rid_account WHERE id = '$id'")->fetch_assoc();
+    } else {
+        return false;
+    }
+    return false;
+}
+
+function rid_deleteChats($uid) {
+    global $rid;
+    $myid   = $rid['dataUser']['id'];
+    $query  = "SELECT * FROM rid_messages WHERE from_id = '$uid' AND to_id = '$myid' OR from_id = '$myid' AND to_id = '$uid'";
+    $q = mysqli_query($rid['sqlConnect'], $query);
+    if (mysqli_num_rows($q)) {
+        while($row = mysqli_fetch_assoc($q)) {
+            rid_deleteMsg($row['id']);
+        }
+    }
+    return $rid['sqlConnect']->query("DELETE FROM rid_chats WHERE id_user = '$myid' AND c_with = '$uid'");
+}
+
+function rid_deleteMsg($msg_id) {
+    global $rid;
+    $myid = $rid['dataUser']['id'];
+    $query = "SELECT * FROM rid_messages WHERE id = '$msg_id'";
+    $q = mysqli_query($rid['sqlConnect'], $query);
+    if ($q) {
+        if (mysqli_num_rows($q) == 1) {
+            $q = mysqli_fetch_assoc($q);
+            if ($q['deleted_one'] == 1 || $q['deleted_two'] == 1) {
+                $rid['sqlConnect']->query("DELETE FROM rid_messages WHERE id = '$msg_id'");
+            } else {
+                $delete_type = 'deleted_one';
+                if ($q['to_id'] == $myid) {
+                    $delete_type = 'deleted_two';
+                }
+                $rid['sqlConnect']->query("UPDATE rid_messages SET $delete_type = '1' WHERE id = '$msg_id'");
+            }
+        }
+    }
+    return true;
+}
+
+function rid_getPosts($byid = 0, $limit = 5) {
+    global $rid;
+    if (!$byid) {
+        $q = "SELECT * FROM rid_posts ORDER BY id DESC LIMIT $limit";
+    }
+    if ($rid['sqlConnect']->query($q)->num_rows > 0) {
+        return $rid['sqlConnect']->query($q);
+    } else {
+        return false;
+    }
+
+    return false;
+}
+
 ?>

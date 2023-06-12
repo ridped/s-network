@@ -15,6 +15,9 @@ if (isset($_GET)) {
 $allow_array     = array(
     'login',
     'register',
+    'getmsg',
+    'create_post',
+    'get_posts'
 );
 if (!in_array($f, $allow_array)) {
     if (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {

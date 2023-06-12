@@ -1,0 +1,25 @@
+{
+  "name": "s-lite",
+  "version": "1.0.0",
+  "description": "Just a simple social network",
+  "main": "rid_server.js",
+  "dependencies": {
+    "express": "^4.17.2",
+    "fs": "0.0.1-security",
+    "fs-extra": "^10.0.0",
+    "http": "0.0.1-security",
+    "https": "^1.0.0",
+    "mysql": "^2.18.1",
+    "node-fetch": "^2.6.1",
+    "path": "^0.12.7",
+    "pm2": "^5.2.0",
+    "socket.io": "^4.4.0"
+  },
+  "scripts": {
+    "test": "forever start kepolo",
+    "start": "node kepolo",
+    "stop": "node kepolo"
+  },
+  "author": "ridah",
+  "license": "MIT"
+}
